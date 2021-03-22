@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace GenericList
 {
@@ -6,7 +7,9 @@ namespace GenericList
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("It's fucking working. Finally!");
+            PracticeList<int> practiceList = new PracticeList<int>();
+            practiceList.Add(2);
+
         }
     }
 }
