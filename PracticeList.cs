@@ -12,18 +12,28 @@ namespace GenericList
 
         public int Count { get; private set; }
 
-
         public void Add(T item)
         {
             for (int i = 0; i < elements.Length; i++)
             {
                 elements[i] = item;
             }
+            Count++;
         }
 
-        public void Remove(T item)
+        public bool Remove(T item)
         {
+            var index = Array.IndexOf(elements, item);
 
+            for (int i = 0; i < Count; i++)
+            {
+                if (Contains(item))
+                {
+                    Count--;
+                    return true;
+                }
+            }
+            return false;
         }
 
         public bool Contains(T item)
@@ -41,12 +51,15 @@ namespace GenericList
 
         public IEnumerator<T> GetEnumerator()
         {
-            return GetEnumerator();
+            foreach (var item in elements)
+            {
+                yield return item;
+            }
         }
 
         IEnumerator IEnumerable.GetEnumerator()
         {
-            return (IEnumerator)this;
+            return GetEnumerator();
         }
     }
 }
