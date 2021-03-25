@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace GenericList
@@ -16,31 +17,29 @@ namespace GenericList
         {
             for (int i = 0; i < elements.Length; i++)
             {
-                elements[i] = item;
+                elements[Count] = item;
             }
             Count++;
         }
 
-        public bool Remove(T item)
-        {
-            var index = Array.IndexOf(elements, item);
 
-            for (int i = 0; i < Count; i++)
-            {
-                if (Contains(item))
-                {
-                    Count--;
-                    return true;
-                }
-            }
-            return false;
+        public void Remove(T item)
+        {
+            T itemToRemove = item;
+            int itemIndex = Array.IndexOf(elements, itemToRemove);
+            elements = elements.Where((val, index) => index != itemIndex).ToArray();
+            Count--;
         }
 
         public bool Contains(T item)
         {
             for (int i = 0; i < Count; i++)
             {
-                if (EqualityComparer<T>.Default.Equals(item))
+                //if (EqualityComparer<T>.Default.Equals(item))
+                //{
+                //    return true;
+                //}
+                if (elements.Contains(item))
                 {
                     return true;
                 }
